@@ -65,7 +65,7 @@ function render () {
 
   diff.write(
     'Use <left> and <right> to adjust brightness\n' +
-    slider + ' ' + (pct < 11 ? '  ' : (pct < 100 ? ' ' : '')) + pct + '%'
+    slider + ' ' + (pct < 10 ? '  ' : (pct < 100 ? ' ' : '')) + pct + '%'
   )
 }
 
