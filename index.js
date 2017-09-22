@@ -8,14 +8,17 @@ if (process.getuid()) {
 var diff = require('ansi-diff-stream')()
 var input = require('neat-input')()
 var fs = require('fs')
+var path = require('path')
 
-var FILE = '/sys/class/backlight/intel_backlight/brightness'
-var MAX = 7500
+var FOLDER = '/sys/class/backlight/intel_backlight'
+var BRIGHTNESS_FILE = path.join(FOLDER, 'brightness')
+var MAX_BRIGHTNESS_FILE = path.join(FOLDER, 'max_brightness')
+var MAX = readInt(MAX_BRIGHTNESS_FILE)
 
-var pct = Math.floor(100 * parseInt(fs.readFileSync(FILE, 'ascii'), 10) / MAX)
+var pct = Math.floor(100 * readInt(BRIGHTNESS_FILE) / MAX)
 var inc = 5
 
-var ws = fs.createWriteStream(FILE)
+var ws = fs.createWriteStream(BRIGHTNESS_FILE)
 
 input.on('right', function () {
   pct += inc
@@ -34,6 +37,10 @@ render()
 
 process.on('SIGWINCH', noop)
 process.stdout.on('resize', onresize)
+
+function readInt (file) {
+  return parseInt(fs.readFileSync(file, 'ascii'), 10)
+}
 
 function update () {
   ws.write('' + Math.max(1, Math.floor(pct / 100 * MAX)) + '\n')
