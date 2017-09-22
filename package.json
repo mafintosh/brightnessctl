@@ -1,0 +1,29 @@
+{
+  "name": "brightnessctl",
+  "version": "0.0.0",
+  "description": "Small tool for linux to adjust screen brightness",
+  "main": "index.js",
+  "dependencies": {
+    "ansi-diff-stream": "^1.2.0",
+    "neat-input": "^1.4.0"
+  },
+  "devDependencies": {
+    "standard": "^10.0.3"
+  },
+  "bin": {
+    "brightnessctl": "./index.js"
+  },
+  "scripts": {
+    "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mafintosh/brightnessctl.git"
+  },
+  "author": "Mathias Buus (@mafintosh)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mafintosh/brightnessctl/issues"
+  },
+  "homepage": "https://github.com/mafintosh/brightnessctl"
+}
