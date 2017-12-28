@@ -5,8 +5,8 @@ if (process.getuid()) {
   process.exit(1)
 }
 
-var diff = require('ansi-diff-stream')()
-var input = require('neat-input')()
+var diffy = require('diffy')()
+var input = require('diffy/input')()
 var fs = require('fs')
 var path = require('path')
 
@@ -32,11 +32,7 @@ input.on('left', function () {
   update()
 })
 
-diff.pipe(process.stdout)
-render()
-
-process.on('SIGWINCH', noop)
-process.stdout.on('resize', onresize)
+diffy.render(render)
 
 function readInt (file) {
   return parseInt(fs.readFileSync(file, 'ascii'), 10)
@@ -44,12 +40,7 @@ function readInt (file) {
 
 function update () {
   ws.write('' + Math.max(1, Math.floor(pct / 100 * MAX)) + '\n')
-  render()
-}
-
-function onresize () {
-  diff.clear()
-  render()
+  diffy.render()
 }
 
 function times (str, n) {
@@ -63,10 +54,8 @@ function render () {
   var widPct = Math.floor(wid * pct / 100)
   var slider = '[' + times('#', widPct) + times(' ', wid - widPct) + ']'
 
-  diff.write(
-    'Use <left> and <right> to adjust brightness\n' +
-    slider + ' ' + (pct < 10 ? '  ' : (pct < 100 ? ' ' : '')) + pct + '%'
-  )
+  return  'Use <left> and <right> to adjust brightness\n' +
+    slider + ' ' + (pct < 10 ? '  ' : (pct < 100 ? ' ' : '')) + pct + '%\n'
 }
 
 function noop () {}

@@ -4,8 +4,7 @@
   "description": "Small tool for linux to adjust screen brightness",
   "main": "index.js",
   "dependencies": {
-    "ansi-diff-stream": "^1.2.0",
-    "neat-input": "^1.4.0"
+    "diffy": "^1.0.1"
   },
   "devDependencies": {
     "standard": "^10.0.3"
