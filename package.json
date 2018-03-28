@@ -1,6 +1,6 @@
 {
   "name": "brightnessctl",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Small tool for linux to adjust screen brightness",
   "main": "index.js",
   "dependencies": {
