@@ -23,6 +23,12 @@ Use <left> and <right> to adjust brightness
 [#######                                        ]  15%
 ```
 
+You can also adjust the brightness with a cli argument like so
+
+```
+sudo brightnessctl 50 # sets the brightness to 50%
+```
+
 PRs that add support for more distros welcome.
 
 ## License

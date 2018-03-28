@@ -34,6 +34,17 @@ input.on('left', function () {
 
 diffy.render(render)
 
+if (/^\d+?$/.test(process.argv[2])) {
+  pct = parseInt(process.argv[2], 10)
+  update()
+  ws.end()
+  ws.on('close', exit)
+}
+
+function exit () {
+  process.exit(0)
+}
+
 function readInt (file) {
   return parseInt(fs.readFileSync(file, 'ascii'), 10)
 }
